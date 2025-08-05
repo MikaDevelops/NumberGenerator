@@ -12,7 +12,16 @@
             //if(inputField.value.match(/\w/g));
             value = inputField.value;
         }
-        function calculate(){}
+        function calculate(){
+            
+            let restStart = value.lastIndexOf("*")+1;
+            let beginEnds = value.indexOf("*");
+            let theRest = value.slice(restStart);
+            let stars = value.match(/\*/g).length;
+            let theBegin = value.slice(0,beginEnds);
+            console.log(stars);
+
+        }
     </script>
 
 </head>
