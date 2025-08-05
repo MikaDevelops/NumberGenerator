@@ -6,20 +6,84 @@
     <title>NumberGenerator</title>
 
     <script>
+
         var value;
+
         function checkInput (){
+
             let inputField = document.getElementById("input");
-            //if(inputField.value.match(/\w/g));
             value = inputField.value;
+
         }
+        
         function calculate(){
             
             let restStart = value.lastIndexOf("*")+1;
             let beginEnds = value.indexOf("*");
             let theRest = value.slice(restStart);
-            let stars = value.match(/\*/g).length;
+            let stars = value.match(/\*/g);
             let theBegin = value.slice(0,beginEnds);
-            console.log(stars);
+
+            for(let i=0; i<stars.length; i++){
+                stars[i]=9;
+            }
+
+            let fillNum = Number(stars.join(""));
+            let arrayOfNumbers = [];
+            let iterations = 10**stars.length;
+
+            for(let i=0; i<iterations; i++){
+                let filler = fillNum.toString(10);
+                if(filler.length<stars.length){
+                    let diff = stars.length - filler.length;
+                    let zeroArr = [];
+                    for (let i=0; i<diff;i++){
+                        zeroArr.push("0");
+                    }
+                    filler = zeroArr.join("") + filler;
+                }
+                arrayOfNumbers.push(theBegin + filler + theRest);
+                fillNum--;
+
+            }
+            
+            let results = [];
+
+            for (let num of arrayOfNumbers){
+                if (checkNum(num)) results.push(num);
+            }
+
+            
+
+        }
+
+        function checkNum(numberToCheck) {
+
+            let numberFront = numberToCheck.slice(0, -1);
+            let checkDigit = numberToCheck.slice(-1);
+
+            let multiplyByTwo = true;
+            let numberArray = [];
+            for(let i=numberFront.length-1; i>-1; i--){
+                if(multiplyByTwo){
+                    let multiplyedNum = Number(numberFront[i])*2;
+                    if (multiplyedNum > 9) multiplyedNum -= 9;
+                    numberArray.push(multiplyedNum);
+                    multiplyByTwo = false;
+                }
+                else{
+                    numberArray.push(Number(numberFront[i]));
+                    multiplyByTwo = true;
+                }
+            }
+            let summedupNum = 0;
+            for (number of numberArray){
+                summedupNum += number;
+            }
+            let calculatedCheckDigit = (10-(summedupNum%10))%10;
+            calculatedCheckDigit = calculatedCheckDigit.toString();
+            if (calculatedCheckDigit === checkDigit) return true;
+            return false;
 
         }
     </script>
