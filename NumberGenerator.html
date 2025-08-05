@@ -52,8 +52,15 @@
             for (let num of arrayOfNumbers){
                 if (checkNum(num)) results.push(num);
             }
+            let htmlBlock = "";
+            for (let num of results){
+                htmlBlock += num+"<br>";
+            }
 
-            
+            let element = document.getElementById('results');
+            element.innerHTML="";
+            element.innerHTML=htmlBlock;
+
 
         }
 
