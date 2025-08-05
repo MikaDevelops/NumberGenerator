@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumberGenerator</title>
+
+    <script>
+        var value;
+        function checkInput (){
+            let inputField = document.getElementById("input");
+            //if(inputField.value.match(/\w/g));
+            value = inputField.value;
+        }
+        function calculate(){}
+    </script>
+
+</head>
+<body>
+    <input type="text" id="input" oninput="checkInput()"></input><button type="button" onclick="calculate()">generate</button>
+    <div id="results"></div>
+</body>
+</html>
